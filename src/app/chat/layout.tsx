@@ -1,7 +1,7 @@
 "use client";
 
-import { IconSidebar } from "@/components/IconSidebar";
-import { UserList } from "@/components/UserList";
+import { IconSidebar } from "@/components/layout/IconSidebar";
+import { UserList } from "@/components/layout/UserList";
 import { users } from "@/lib/data";
 import { useChatStore } from "@/store/chat-store";
 import { cn } from "@/lib/utils";

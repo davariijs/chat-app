@@ -7,10 +7,10 @@ import { useSocket } from '@/hooks/useSocket';
 import { User } from '@/types';
 import { ChatInput } from './ChatInput';
 import { MessageBubble } from './MessageBubble';
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { Button } from './ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import { Button } from '../ui/button';
 import { ArrowLeft, Check, Menu, Star, User as UserIcon } from 'lucide-react';
-import { ContactInfoSidebar } from './ContactInfoSidebar';
+import { ContactInfoSidebar } from '../layout/ContactInfoSidebar';
 import { cn } from "@/lib/utils";
 
 interface ChatWindowProps {
@@ -95,9 +95,9 @@ export function ChatWindow({ user }: ChatWindowProps) {
       </header>
 
       <main className="flex-1 p-6 space-y-4 overflow-y-auto">
-        {messages.map((msg) => (
-          <MessageBubble key={msg.id} message={msg} />
-        ))}
+        {messages.map((msg, index) => (
+            <MessageBubble key={`msg-${msg.id}-${index}`} message={msg} />
+          ))}
         <div ref={messagesEndRef} />
       </main>
 

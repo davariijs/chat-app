@@ -10,9 +10,14 @@ interface ChatState {
   toggleChatList: () => void;
   setSelectedUser: (user: User) => void;
   addMessage: (message: Message) => void;
-  resetUnreadCount: (userId: string) => void;
 }
 
+/**
+ * A utility function to safely retrieve and parse chat history for a given user from localStorage.
+ * Returns an empty array if no history is found or if parsing fails.
+ * @param userId The ID of the user whose chat history is to be retrieved.
+ * @returns An array of Message objects.
+ */
 const getInitialMessages = (userId: string): Message[] => {
   if (typeof window === 'undefined') return [];
   try {
@@ -24,20 +29,16 @@ const getInitialMessages = (userId: string): Message[] => {
   }
 };
 
-export const useChatStore = create<ChatState>((set,get) => ({
+export const useChatStore = create<ChatState>((set) => ({
   messages: [],
   selectedUser: null,
   isIconSidebarOpen: false,
   toggleIconSidebar: () => set((state) => ({ isIconSidebarOpen: !state.isIconSidebarOpen })),
   isChatListOpen: false,
   toggleChatList: () => set((state) => ({ isChatListOpen: !state.isChatListOpen })),
-  resetUnreadCount: (userId) => {
-    console.log(`Unread count for user ${userId} should be reset.`);
-  },
   setSelectedUser: (user) => {
     const messages = getInitialMessages(user.id);
     set({ selectedUser: user, messages });
-    get().resetUnreadCount(user.id);
   },
   addMessage: (message) => {
     set((state) => {

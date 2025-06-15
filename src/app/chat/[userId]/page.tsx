@@ -1,5 +1,5 @@
-import { ChatWindow } from '@/components/ChatWindow';
-import { ContactInfoSidebar } from '@/components/ContactInfoSidebar';
+import { ChatWindow } from '@/components/chat/ChatWindow';
+import { ContactInfoSidebar } from '@/components/layout/ContactInfoSidebar';
 import { users } from '@/lib/data';
 import { notFound } from 'next/navigation';
 import { User } from '@/types';
