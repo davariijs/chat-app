@@ -1,10 +1,21 @@
+export interface UserInfo {
+  storeName: string;
+  storeUrl: string;
+  shopifyUrl: string;
+  email: string;
+  jobTitle: string;
+}
+
 export interface User {
   id: string;
   name: string;
   avatar: string;
-  lastMessage?: string;
-  lastMessageTime?: string;
-  unreadCount?: number;
+  phone: string;
+  lastMessage: string;
+  lastMessageTime: string;
+  unreadCount: number;
+  status: 'open' | 'closed';
+  info: UserInfo;
 }
 
 export interface Message {
@@ -12,4 +23,5 @@ export interface Message {
   sender: 'me' | 'other';
   text: string;
   timestamp: string;
+  avatar?: string;
 }
