@@ -7,7 +7,10 @@
     "dev:socket": "ts-node --project tsconfig.server.json socket-server.ts",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
@@ -34,6 +37,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4.1.10",
+    "@testing-library/jest-dom": "^6.6.3",
     "@types/jest": "^29.5.14",
     "@types/node": "^20.19.0",
     "@types/react": "^19",
@@ -43,6 +47,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.3",
     "jest": "^30.0.0",
+    "jest-environment-jsdom": "^30.0.0",
     "tailwindcss": "^4",
     "ts-jest": "^29.4.0",
     "ts-node": "^10.9.2",
