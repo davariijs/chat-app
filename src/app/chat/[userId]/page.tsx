@@ -1,27 +1,27 @@
-import { UserList } from '@/components/UserList';
 import { ChatWindow } from '@/components/ChatWindow';
-import {
-  ResizableHandle,
-  ResizablePanel,
-  ResizablePanelGroup,
-} from "@/components/ui/resizable";
+import { ContactInfoSidebar } from '@/components/ContactInfoSidebar';
+import { users } from '@/lib/data';
+import { notFound } from 'next/navigation';
 
 interface ChatPageProps {
-  params: {
-    userId: string;
-  };
+  params: { userId: string };
 }
 
 export default function ChatPage({ params }: ChatPageProps) {
+  const user = users.find((u) => u.id === params.userId);
+
+  if (!user) {
+    notFound();
+  }
+
   return (
-    <ResizablePanelGroup direction="horizontal" className="h-screen w-full">
-      <ResizablePanel defaultSize={25}>
-        <UserList />
-      </ResizablePanel>
-      <ResizableHandle withHandle />
-      <ResizablePanel defaultSize={75}>
-        <ChatWindow userId={params.userId} />
-      </ResizablePanel>
-    </ResizablePanelGroup>
+    <div className="flex h-full">
+      <div className="flex-1">
+        <ChatWindow user={user} />
+      </div>
+      <div className="hidden lg:block w-[350px] border-l">
+        <ContactInfoSidebar user={user} />
+      </div>
+    </div>
   );
 }
