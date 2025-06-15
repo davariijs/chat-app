@@ -13,47 +13,72 @@ import { Search } from "lucide-react";
 import { useChatStore } from "@/store/chat-store";
 
 function UserListItem({ user, isActive }: { user: User; isActive: boolean }) {
-  const [lastMessage, setLastMessage] = useState(user.lastMessage);
-  const { toggleChatList } = useChatStore();
+  const [lastMessage, setLastMessage] = useState<Message | null>(null);
+  const [unreadCount, setUnreadCount] = useState(0);
+  const { toggleChatList, resetUnreadCount } = useChatStore();
 
   useEffect(() => {
+     const hasBeenRead = localStorage.getItem(`read_status_${user.id}`) === 'true';
+    if (!hasBeenRead) {
+      setUnreadCount(user.unreadCount);
+    }
     try {
       const storedMessages = localStorage.getItem(`chat_history_${user.id}`);
       if (storedMessages) {
         const messages: Message[] = JSON.parse(storedMessages);
         if (messages.length > 0) {
-          const last = messages[messages.length - 1];
-          const prefix = last.sender === 'me' ? 'You: ' : '';
-          setLastMessage(prefix + last.text);
+          setLastMessage(messages[messages.length - 1]);
         } else {
-           setLastMessage("No messages yet.");
+          setLastMessage(null);
         }
       }
-    } catch {
-      setLastMessage(user.lastMessage);
+    } catch (e) {
+      console.error("Failed to parse chat history:", e);
     }
-  }, [user.id, user.lastMessage]);
+  }, [user.id, user.unreadCount]);
+
+  const handleClick = () => {
+    setUnreadCount(0);
+    localStorage.setItem(`read_status_${user.id}`, 'true');
+    resetUnreadCount(user.id);
+    if (window.innerWidth < 768) {
+      toggleChatList();
+    }
+  };
 
   return (
-    <Link
-      href={`/chat/${user.id}`}
-      onClick={() => { if (window.innerWidth < 768) toggleChatList() }}
-      className={cn("flex items-center gap-3 p-3 rounded-lg hover:bg-muted", isActive && "bg-muted")}
+    <Link href={`/chat/${user.id}`} onClick={handleClick}
+      className={cn(
+        "flex items-center gap-3 p-3 rounded-lg hover:bg-muted relative",
+        isActive && "bg-muted"
+      )}
     >
+      {isActive && (
+        <div className="absolute left-0 top-1/2 -translate-y-1/2 h-2/3 w-1 bg-primary rounded-r-full" />
+      )}
+
       <Avatar>
         <AvatarImage src={user.avatar} alt={user.name} />
         <AvatarFallback>{user.name[0]}</AvatarFallback>
       </Avatar>
+      
       <div className="flex-1 min-w-0">
         <div className="flex justify-between items-center">
           <p className="font-semibold truncate">{user.name}</p>
-          <p className="text-xs text-muted-foreground flex-shrink-0">{user.lastMessageTime}</p>
+          {lastMessage && <p className="text-xs text-muted-foreground flex-shrink-0">{lastMessage.timestamp}</p>}
         </div>
         <div className="flex justify-between items-center mt-1">
-          <p className="text-sm text-muted-foreground truncate">{lastMessage}</p>
-          {user.unreadCount > 0 && (
-            <Badge className="bg-accent text-accent-foreground h-5 w-5 flex items-center justify-center p-0 ml-2">
-              {user.unreadCount}
+          {lastMessage ? (
+            <p className="text-sm text-muted-foreground truncate">
+              {lastMessage.sender === 'me' ? 'You: ' : ''}{lastMessage.text}
+            </p>
+          ) : (
+            <p className="text-sm text-muted-foreground italic">No messages yet.</p>
+          )}
+          
+          {unreadCount > 0 && (
+            <Badge className="bg-primary text-primary-foreground h-5 w-5 flex items-center justify-center p-0 ml-2">
+              {unreadCount}
             </Badge>
           )}
         </div>
