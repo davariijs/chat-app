@@ -16,4 +16,4 @@ io.on("connection", (socket: Socket) => {
   socket.on("disconnect", () => {});
 });
 
-console.log("Socket.IO TypeScript server running on port 3001");
+console.log("🚀 Socket.IO server is running on port 3001");
