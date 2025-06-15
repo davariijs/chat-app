@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Home, MessageSquare, Users, Settings, Bell, Archive } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { ThemeToggleButton } from "./ThemeToggleButton";
@@ -21,18 +22,24 @@ const sidebarItems = [
 export function IconSidebar() {
   return (
     <TooltipProvider delayDuration={0}>
-      <nav className="w-20 bg-card p-4 flex flex-col items-center gap-6 border-r h-full">
-        <div className="h-10 w-10 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-bold text-lg">
-          C
+      <nav className="w-20 bg-purple-50 dark:bg-card p-4 flex flex-col items-center gap-6 border-r h-full">
+        <div className="h-10 w-10">
+          <Image
+            src="/logo.png"
+            alt="Chat App Logo"
+            width={40}
+            height={40}
+          />
         </div>
+
         <div className="flex flex-col gap-4">
           {sidebarItems.map((item, index) => (
             <Tooltip key={index}>
               <TooltipTrigger asChild>
                 <div className={cn(
-                  "p-2 rounded-lg cursor-pointer",
+                  "p-[6px] rounded-lg cursor-pointer",
                   item.active 
-                    ? 'bg-accent text-accent-foreground'
+                    ? 'bg-primary text-primary-foreground' 
                     : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                 )}>
                   <item.icon className="h-6 w-6" />

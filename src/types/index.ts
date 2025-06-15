@@ -1,9 +1,17 @@
+export interface CampaignInfo {
+  name: string;
+  status: 'Active' | 'Paused' | 'Finished';
+  spend: string;
+}
+
 export interface UserInfo {
   storeName: string;
   storeUrl: string;
   shopifyUrl: string;
   email: string;
   jobTitle: string;
+  campaign: CampaignInfo;
+  tags: string[];
 }
 
 export interface User {

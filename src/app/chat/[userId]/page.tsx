@@ -11,7 +11,8 @@ interface ChatPageProps {
 }
 
 export default async function ChatPage({ params }: ChatPageProps) {
-  const user = users.find((u: User) => u.id === params.userId);
+  const awaitedParams = await params;
+  const user = users.find((u: User) => u.id === awaitedParams.userId);
 
   if (!user) {
     notFound();
