@@ -12,7 +12,7 @@ export default function ChatLayout({ children }: { children: React.ReactNode; })
   const { isIconSidebarOpen, toggleIconSidebar, isChatListOpen, toggleChatList } = useChatStore();
 
   return (
-    <div className="flex h-screen bg-soft-bg text-foreground">
+    <div className="flex h-screen bg-soft-bg text-foreground overflow-hidden">
       {isIconSidebarOpen && (
         <div onClick={toggleIconSidebar} className="fixed inset-0 bg-black/30 z-40 md:hidden" />
       )}
