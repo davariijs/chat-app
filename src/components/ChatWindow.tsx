@@ -34,7 +34,7 @@ export function ChatWindow({ user }: ChatWindowProps) {
     <div className="relative flex flex-col h-full bg-soft-bg">
       <header className="p-4 border-b bg-background flex justify-between items-center h-20">
         <div className="flex items-center gap-3 min-w-0">
-          <Button onClick={toggleChatList} variant="ghost" size="icon" className="md:hidden">
+          <Button onClick={toggleChatList} variant="ghost" size="icon" className="md:hidden flex-shrink-0">
             <Menu className="h-5 w-5" />
           </Button>
           <Link href="/chat" className="hidden md:block">
@@ -42,19 +42,22 @@ export function ChatWindow({ user }: ChatWindowProps) {
               <ArrowLeft className="h-5 w-5" />
             </Button>
           </Link>
-          <Avatar>
-            <AvatarImage src={user.avatar} alt={user.name} />
-            <AvatarFallback>{user.name[0]}</AvatarFallback>
-          </Avatar>
+          <div className="flex-shrink-0">
+            <Avatar>
+              <AvatarImage src={user.avatar} alt={user.name} />
+              <AvatarFallback>{user.name[0]}</AvatarFallback>
+            </Avatar>
+          </div>
           <div className="flex-1 min-w-0">
-            <p className="font-bold">{user.name}</p>
-            <p className="text-sm text-muted-foreground">{user.phone}</p>
+            <p className="font-bold text-sm sm:text-base truncate ">{user.name}</p>
+            <p className="text-xs text-muted-foreground truncate">{user.phone}</p>
           </div>
         </div>
         <div className="flex items-center gap-1 flex-shrink-0">
           <Button variant="ghost" size="icon"><Star className="h-5 w-5" /></Button>
           <Button variant="outline" className="gap-2">
-            <Check className="h-4 w-4" /> {user.status === 'open' ? 'Open' : 'Closed'}
+            <Check className="h-4 w-4" /> 
+            <span className="hidden sm:inline text-xs">{user.status === 'open' ? 'Open' : 'Closed'}</span>
           </Button>
           <Button onClick={() => setInfoSidebarOpen(true)} variant="ghost" size="icon" className="lg:hidden">
             <UserIcon className="h-5 w-5" />
