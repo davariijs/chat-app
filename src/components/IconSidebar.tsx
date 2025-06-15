@@ -48,7 +48,7 @@ export function IconSidebar() {
         <div className="mt-auto flex flex-col items-center gap-4">
           <ThemeToggleButton />
           <Avatar>
-            <AvatarImage src="/avatars/me.png" alt="My Avatar" />
+            <AvatarImage src="/avatars/user.webp" alt="My Avatar" />
             <AvatarFallback>Me</AvatarFallback>
           </Avatar>
         </div>

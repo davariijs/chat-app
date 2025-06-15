@@ -8,9 +8,9 @@ interface ChatState {
   toggleIconSidebar: () => void;
   isChatListOpen: boolean;
   toggleChatList: () => void;
-
   setSelectedUser: (user: User) => void;
   addMessage: (message: Message) => void;
+  resetUnreadCount: (userId: string) => void;
 }
 
 const getInitialMessages = (userId: string): Message[] => {
@@ -24,16 +24,20 @@ const getInitialMessages = (userId: string): Message[] => {
   }
 };
 
-export const useChatStore = create<ChatState>((set) => ({
+export const useChatStore = create<ChatState>((set,get) => ({
   messages: [],
   selectedUser: null,
   isIconSidebarOpen: false,
   toggleIconSidebar: () => set((state) => ({ isIconSidebarOpen: !state.isIconSidebarOpen })),
   isChatListOpen: false,
   toggleChatList: () => set((state) => ({ isChatListOpen: !state.isChatListOpen })),
+  resetUnreadCount: (userId) => {
+    console.log(`Unread count for user ${userId} should be reset.`);
+  },
   setSelectedUser: (user) => {
     const messages = getInitialMessages(user.id);
     set({ selectedUser: user, messages });
+    get().resetUnreadCount(user.id);
   },
   addMessage: (message) => {
     set((state) => {

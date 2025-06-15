@@ -2,13 +2,16 @@ import { ChatWindow } from '@/components/ChatWindow';
 import { ContactInfoSidebar } from '@/components/ContactInfoSidebar';
 import { users } from '@/lib/data';
 import { notFound } from 'next/navigation';
+import { User } from '@/types';
 
 interface ChatPageProps {
-  params: { userId: string };
+  params: {
+    userId: string;
+  };
 }
 
-export default function ChatPage({ params }: ChatPageProps) {
-  const user = users.find((u) => u.id === params.userId);
+export default async function ChatPage({ params }: ChatPageProps) {
+  const user = users.find((u: User) => u.id === params.userId);
 
   if (!user) {
     notFound();
