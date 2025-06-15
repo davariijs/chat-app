@@ -28,7 +28,7 @@ export function ChatInput({ onSendMessage }: ChatInputProps) {
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="flex items-center gap-2">
-      <Input {...form.register('message')} placeholder="Type a message..." autoComplete="off" />
+      <Input {...form.register('message')} placeholder="Type Something..." autoComplete="off" />
       <Button type="submit" size="icon">
         <Send className="h-4 w-4" />
       </Button>

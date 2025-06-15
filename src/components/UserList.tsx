@@ -11,6 +11,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Badge } from "./ui/badge";
 import { Search } from "lucide-react";
 import { useChatStore } from "@/store/chat-store";
+import { Plus } from "lucide-react";
+import { Button } from "./ui/button";
 
 function UserListItem({ user, isActive }: { user: User; isActive: boolean }) {
   const [lastMessage, setLastMessage] = useState<Message | null>(null);
@@ -95,7 +97,7 @@ export function UserList({ users }: { users: User[] }) {
   const filteredUsers = users.filter(user => user.status === activeTab);
 
   return (
-    <div className="p-4 space-y-4">
+    <div className="p-4 space-y-4 h-full relative">
       <div className="relative">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
         <Input placeholder="Search by contact" className="pl-10" />
@@ -115,6 +117,12 @@ export function UserList({ users }: { users: User[] }) {
           )}
         </TabsContent>
       </Tabs>
+
+      <div className="absolute bottom-6 right-6">
+        <Button className="h-12 w-12 rounded-full shadow-lg">
+          <Plus className="h-6 w-6" />
+        </Button>
+      </div>
     </div>
   );
 }
