@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Home, MessageSquare, Users, Settings, Bell, Archive } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { ThemeToggleButton } from "./ThemeToggleButton";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { ThemeToggleButton } from "../shared/ThemeToggleButton";
 import {
   Tooltip,
   TooltipContent,

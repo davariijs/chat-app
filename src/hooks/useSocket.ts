@@ -3,6 +3,11 @@ import { io, Socket } from 'socket.io-client';
 import { useChatStore } from '@/store/chat-store';
 import { Message } from '@/types';
 
+
+/**
+ * A custom React hook to manage the lifecycle of a single WebSocket connection
+ * for the entire application. It handles sending and receiving messages.
+ */
 export function useSocket() {
   const socketRef = useRef<Socket | null>(null);
   const addMessage = useChatStore((state) => state.addMessage);
@@ -11,9 +16,7 @@ export function useSocket() {
     const socket = io('http://localhost:3001');
     socketRef.current = socket;
 
-    socket.on('connect', () => {
-      console.log('Connected to socket server');
-    });
+    socket.on('connect', () => {});
 
     socket.on('receive_message', (message: Message) => {
       addMessage({ ...message, sender: 'other' });
