@@ -1,5 +1,6 @@
 import {create} from 'zustand';
 import { Message, User } from '@/types';
+import { getInitialMessages } from '@/lib/utils';
 
 interface ChatState {
   messages: Message[];
@@ -11,23 +12,6 @@ interface ChatState {
   setSelectedUser: (user: User) => void;
   addMessage: (message: Message) => void;
 }
-
-/**
- * A utility function to safely retrieve and parse chat history for a given user from localStorage.
- * Returns an empty array if no history is found or if parsing fails.
- * @param userId The ID of the user whose chat history is to be retrieved.
- * @returns An array of Message objects.
- */
-const getInitialMessages = (userId: string): Message[] => {
-  if (typeof window === 'undefined') return [];
-  try {
-    const storedMessages = localStorage.getItem(`chat_history_${userId}`);
-    return storedMessages ? JSON.parse(storedMessages) : [];
-  } catch (error) {
-    console.error("Failed to parse messages from localStorage", error);
-    return [];
-  }
-};
 
 export const useChatStore = create<ChatState>((set) => ({
   messages: [],
