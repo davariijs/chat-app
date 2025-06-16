@@ -22,7 +22,7 @@ const sidebarItems = [
 export function IconSidebar() {
   return (
     <TooltipProvider delayDuration={0}>
-      <nav className="w-20 bg-purple-50 dark:bg-card p-4 flex flex-col items-center gap-6 border-r h-full">
+      <nav className="w-20 bg-purple-50 dark:bg-card px-4 py-6 flex flex-col items-center gap-6 border-r h-full">
         <div className="h-10 w-10">
           <Image
             src="/logo.png"
