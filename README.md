@@ -5,12 +5,6 @@ A modern, responsive, and real-time chat application built with Next.js, TypeScr
 
 ---
 
-### 🚀 Live Demo
-
-[**[]**]
-
----
-
 ### ✨ Features
 
 - **Real-time Messaging**: Instant message delivery using `Socket.io`.
@@ -33,7 +27,6 @@ A modern, responsive, and real-time chat application built with Next.js, TypeScr
 - **State Management**: `Zustand`
 - **Forms**: `React Hook Form` & `Zod` (used in ChatInput)
 - **Testing**: `Jest` & `ts-jest`
-- **Deployment**: `Netlify`
 
 
 ---
