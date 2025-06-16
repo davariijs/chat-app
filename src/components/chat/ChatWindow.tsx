@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from 'react';
-import Link from "next/link";
 import { useChatStore } from '@/store/chat-store';
 import { useSocket } from '@/hooks/useSocket';
 import { User } from '@/types';
@@ -9,7 +8,7 @@ import { ChatInput } from './ChatInput';
 import { MessageBubble } from './MessageBubble';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { Button } from '../ui/button';
-import { ArrowLeft, Check, Menu, Star, User as UserIcon } from 'lucide-react';
+import { Check, Menu, Star, User as UserIcon } from 'lucide-react';
 import { ContactInfoSidebar } from '../layout/ContactInfoSidebar';
 import { cn } from "@/lib/utils";
 
@@ -48,16 +47,11 @@ export function ChatWindow({ user }: ChatWindowProps) {
 
   return (
     <div className="relative flex flex-col h-full bg-soft-bg">
-      <header className="p-2 sm:p-3 border-b bg-background flex justify-between items-center h-20 gap-1 sm:gap-2">
+      <header className="p-2 sm:p-6 border-b bg-background flex justify-between items-center h-20 gap-1 sm:gap-2">
         <div className="flex items-center gap-2 sm:gap-3 min-w-0">
           <Button onClick={toggleChatList} variant="ghost" size="icon" className="md:hidden flex-shrink-0">
             <Menu className="h-5 w-5" />
           </Button>
-          <Link href="/chat" className="hidden md:block">
-            <Button variant="ghost" size="icon">
-              <ArrowLeft className="h-5 w-5" />
-            </Button>
-          </Link>
           <div className="flex-shrink-0">
             <Avatar className="h-8 w-8 sm:h-10 sm:w-10">
               <AvatarImage src={user.avatar} alt={user.name} />
